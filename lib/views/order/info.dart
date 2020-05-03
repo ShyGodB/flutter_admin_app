@@ -8,17 +8,21 @@ class OrderInfoPage extends StatefulWidget {
 }
 
 class _OrderInfoPageState extends State<OrderInfoPage> {
-  List tmpList = [];
-
-  get arguments => null;
-
-  initState() {
-    super.initState();
-    print('orderId is $arguments');
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Text('订单详情');
+    return Scaffold(
+        appBar: AppBar(title: Text('订单详情')),
+        body: ListView(
+          children: <Widget>[
+            Text('这是订单详情页面，可从订单列表跳转'),
+            RaisedButton(
+              child: Text('点击返回'),
+              onPressed: () {
+                print('123123');
+                Navigator.pop(context);
+              },
+            )
+          ],
+        ));
   }
 }

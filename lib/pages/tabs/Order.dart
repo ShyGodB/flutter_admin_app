@@ -42,8 +42,7 @@ class _OrderPageState extends State<OrderPage> {
             child: column,
           ),
           onTap: () {
-            Navigator.pushNamed(context, '/order/info',
-                arguments: item['orderId']);
+            Navigator.pushNamed(context, '/order/info');
           }));
     }
     return list;
