@@ -1,4 +1,4 @@
-# app_admin_edtuina
+# flutter_admin_app
 
 A new Flutter project.
 

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:app_admin_edtuina/pages/Tabs.dart';
-import 'package:app_admin_edtuina/pages/tabs/Home.dart';
-import 'package:app_admin_edtuina/pages/tabs/Order.dart';
-import 'package:app_admin_edtuina/pages/tabs/User.dart';
-import 'package:app_admin_edtuina/pages/tabs/Tech.dart';
-import 'package:app_admin_edtuina/pages/tabs/App.dart';
-import 'package:app_admin_edtuina/views/order/info.dart';
+import 'package:flutter_admin_app/pages/Tabs.dart';
+import 'package:flutter_admin_app/pages/tabs/Home.dart';
+import 'package:flutter_admin_app/pages/tabs/Order.dart';
+import 'package:flutter_admin_app/pages/tabs/User.dart';
+import 'package:flutter_admin_app/pages/tabs/Tech.dart';
+import 'package:flutter_admin_app/pages/tabs/App.dart';
 
 final routes = {
   '/': (context) => Tabs(),
@@ -15,7 +14,6 @@ final routes = {
   '/user': (context) => UserPage(),
   '/tech': (context) => TechPage(),
   '/app': (context) => AppPage(),
-  '/order/info': (context, {arguments}) => OrderInfoPage(arguments: arguments),
 };
 
 dynamic onGenerateRoute = (RouteSettings settings) {

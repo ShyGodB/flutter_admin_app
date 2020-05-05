@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'tabs/Home.dart';
 import 'tabs/Order.dart';
-// import 'tabs/User.dart';
-// import 'tabs/Tech.dart';
+import 'tabs/User.dart';
+import 'tabs/Tech.dart';
 import 'tabs/App.dart';
 
 class Tabs extends StatefulWidget {
@@ -18,8 +18,8 @@ class _TabState extends State<Tabs> {
   List _pageList = [
     HomePage(),
     OrderPage(),
-    // UserPage(),
-    // TechPage(),
+    UserPage(),
+    TechPage(),
     AppPage(),
   ];
 
@@ -32,10 +32,8 @@ class _TabState extends State<Tabs> {
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('首页')),
             BottomNavigationBarItem(icon: Icon(Icons.book), title: Text('订单')),
-            // BottomNavigationBarItem(
-            //     icon: Icon(Icons.people), title: Text('用户')),
-            // BottomNavigationBarItem(
-            //     icon: Icon(Icons.supervised_user_circle), title: Text('技师')),
+            BottomNavigationBarItem(icon: Icon(Icons.people), title: Text('用户')),
+            BottomNavigationBarItem(icon: Icon(Icons.supervised_user_circle), title: Text('技师')),
             BottomNavigationBarItem(icon: Icon(Icons.apps), title: Text('应用'))
           ],
           type: BottomNavigationBarType.fixed,

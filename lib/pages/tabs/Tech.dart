@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../api/Index.dart';
 
+import '../views/tech/info.dart';
+
 class TechPage extends StatefulWidget {
   TechPage({Key key}) : super(key: key);
 
@@ -10,31 +12,30 @@ class TechPage extends StatefulWidget {
 }
 
 class _TechPageState extends State<TechPage> {
-  List tmpList;
-  initState() {
+  List techList;
+
+  @override
+  void initState() { 
     super.initState();
-    _getData().then((val) {
+    _listUser().then((res) {
       setState(() {
-        tmpList = val.toList();
+        techList = res.toList();
       });
     });
   }
 
-  _getData() async {
+  _listUser() async {
     var res = await get('/tech/list');
     return res;
   }
 
-  List<Widget> buildList() {
+  List<Widget> _buildTechListWidget() {
     List<Widget> list = [];
-    for (var item in tmpList) {
+    for (var tech in techList) {
       var column = Column(
         children: <Widget>[
-          ListTile(title: Text('姓名：' + item['realName'])),
-          Divider(),
-          ListTile(title: Text('手机：' + item['phone'])),
-          ListTile(title: Text('年龄：' + item['age'])),
-          ListTile(title: Text('单量：' + item['orders'].toString())),
+          ListTile(title: Text("技师姓名：${tech['realName'] ?? ''}")),
+          ListTile(title: Text("手机号：${tech['phone'] ?? '暂无'}")),
         ],
       );
       list.add(InkWell(
@@ -43,7 +44,10 @@ class _TechPageState extends State<TechPage> {
             child: column,
           ),
           onTap: () {
-            print(item['orderId']);
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => TechInfoPage(
+                      arguments: tech['techId'].toString(),
+                    )));
           }));
     }
     return list;
@@ -51,6 +55,8 @@ class _TechPageState extends State<TechPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(children: this.buildList());
+    return ListView(
+      children: this._buildTechListWidget()
+    );
   }
 }

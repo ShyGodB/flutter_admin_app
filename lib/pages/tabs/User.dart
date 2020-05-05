@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../api//Index.dart';
 
+import '../views/user/info.dart';
+
 class UserPage extends StatefulWidget {
   UserPage({Key key}) : super(key: key);
 
@@ -10,31 +12,30 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-  List tmpList;
-  initState() {
+  List userList;
+
+  @override
+  void initState() { 
     super.initState();
-    _getData().then((val) {
+    _listUser().then((res) {
       setState(() {
-        tmpList = val.toList();
+        userList = res.toList();
       });
     });
   }
 
-  _getData() async {
+  _listUser() async {
     var res = await get('/user/list');
     return res;
   }
 
-  List<Widget> buildList() {
+  List<Widget> _buildUserListWidget() {
     List<Widget> list = [];
-    for (var item in tmpList) {
+    for (var user in userList) {
       var column = Column(
         children: <Widget>[
-          ListTile(title: Text('姓名：' + item['realName'])),
-          Divider(),
-          ListTile(title: Text('手机：' + item['phone'])),
-          ListTile(title: Text('余额：' + item['amount'])),
-          ListTile(title: Text('注册时间：' + item['regTime'])),
+          ListTile(title: Text("用户姓名：${user['realName'] ?? user['nickName'] ?? ''}")),
+          ListTile(title: Text("手机号：${user['phone'] ?? '暂无'}")),
         ],
       );
       list.add(InkWell(
@@ -43,7 +44,10 @@ class _UserPageState extends State<UserPage> {
             child: column,
           ),
           onTap: () {
-            print(item['orderId']);
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => UserInfoPage(
+                      arguments: user['userId'].toString(),
+                    )));
           }));
     }
     return list;
@@ -51,6 +55,8 @@ class _UserPageState extends State<UserPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(children: this.buildList());
+    return ListView(
+      children: this._buildUserListWidget()
+    );
   }
 }

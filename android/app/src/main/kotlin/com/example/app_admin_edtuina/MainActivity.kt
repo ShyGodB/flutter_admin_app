@@ -1,4 +1,4 @@
-package com.example.app_admin_edtuina
+package com.example.flutter_admin_app
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

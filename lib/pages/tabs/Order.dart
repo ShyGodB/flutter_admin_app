@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../api/Index.dart';
 
-import '../../views/order/info.dart';
+import '../views/order/info.dart';
 
 class OrderPage extends StatefulWidget {
   OrderPage({Key key}) : super(key: key);
@@ -46,7 +46,7 @@ class _OrderPageState extends State<OrderPage> {
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => OrderInfoPage(
-                      arguments: item['orderId'],
+                      arguments: item['orderId'] ?? item['orderId'].toString() ?? '',
                     )));
           }));
     }

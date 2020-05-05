@@ -1,4 +1,4 @@
-import 'package:app_admin_edtuina/routes/Index.dart';
+import 'package:flutter_admin_app/routes/Index.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
