@@ -16,10 +16,10 @@ class OrderInfoPage extends StatefulWidget {
 class _OrderInfoPageState extends State<OrderInfoPage> {
   String arguments;
   Map order = {"orderId": '123'};
-  Map record;
+  // Map record;
   Map tech = {"realName": '123'};
   Map user = {"realName": '123'};
-  List calls;
+  // List calls;
   _OrderInfoPageState({Key key, this.arguments = ''});
 
   @override
@@ -29,10 +29,10 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
       _getOrder().then((res) {
         setState(() {
           this.order = res['data']['order'];
-          this.record = res['data']['record'];
+          // this.record = res['data']['record'];
           this.tech = res['data']['tech'];
           this.user = res['data']['user'];
-          this.calls = res['data']['calls'];
+          // this.calls = res['data']['calls'];
         });
       });
     }
@@ -95,7 +95,7 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
     return ListView(
       children: <Widget>[
         ListTile(
-          title: Text('订单编号: ${this.order['orderid']}')
+          title: Text('订单编号: ${this.order['orderId']}')
         ),
         ListTile(
           title: Text('服务项目: ${this.order['projectsName']}')
