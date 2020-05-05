@@ -12,26 +12,14 @@ class TechPage extends StatefulWidget {
 }
 
 class _TechPageState extends State<TechPage> {
-  List techList;
-
-  @override
-  void initState() { 
-    super.initState();
-    _listUser().then((res) {
-      setState(() {
-        techList = res.toList();
-      });
-    });
-  }
-
-  _listUser() async {
+  _listTech() async {
     var res = await get('/tech/list');
     return res;
   }
 
-  List<Widget> _buildTechListWidget() {
+  Widget _buildTechListWidget(data) {
     List<Widget> list = [];
-    for (var tech in techList) {
+    for (var tech in data) {
       var column = Column(
         children: <Widget>[
           ListTile(title: Text("技师姓名：${tech['realName'] ?? ''}")),
@@ -50,13 +38,20 @@ class _TechPageState extends State<TechPage> {
                     )));
           }));
     }
-    return list;
+    return ListView(children: list);
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: this._buildTechListWidget()
+    return FutureBuilder(
+      future: this._listTech(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData == false) {
+          return Text('');
+        } else {
+          return this._buildTechListWidget(snapshot.data);
+        }
+      },
     );
   }
 }

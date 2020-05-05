@@ -11,24 +11,14 @@ class OrderPage extends StatefulWidget {
 }
 
 class _OrderPageState extends State<OrderPage> {
-  List tmpList = [];
-  initState() {
-    super.initState();
-    _getData().then((val) {
-      setState(() {
-        tmpList = val.toList();
-      });
-    });
-  }
-
-  _getData() async {
+  _listOrder() async {
     var res = await get('/order/list');
     return res;
   }
 
-  List<Widget> buildList() {
+  Widget _buildOrderListWidget(data) {
     List<Widget> list = [];
-    for (var item in tmpList) {
+    for (var item in data) {
       var column = Column(
         children: <Widget>[
           ListTile(title: Text('技师姓名：' + item['techName'])),
@@ -50,11 +40,20 @@ class _OrderPageState extends State<OrderPage> {
                     )));
           }));
     }
-    return list;
+    return ListView(children: list);
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView(children: this.buildList());
+    return FutureBuilder(
+      future: this._listOrder(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData == false) {
+          return Text('');
+        } else {
+          return this._buildOrderListWidget(snapshot.data);
+        }
+      },
+    );
   }
 }

@@ -12,26 +12,14 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-  List userList;
-
-  @override
-  void initState() { 
-    super.initState();
-    _listUser().then((res) {
-      setState(() {
-        userList = res.toList();
-      });
-    });
-  }
-
   _listUser() async {
     var res = await get('/user/list');
     return res;
   }
 
-  List<Widget> _buildUserListWidget() {
+  Widget _buildUserListWidget(data) {
     List<Widget> list = [];
-    for (var user in userList) {
+    for (var user in data) {
       var column = Column(
         children: <Widget>[
           ListTile(title: Text("用户姓名：${user['realName'] ?? user['nickName'] ?? ''}")),
@@ -50,13 +38,22 @@ class _UserPageState extends State<UserPage> {
                     )));
           }));
     }
-    return list;
+    return ListView(
+      children: list
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: this._buildUserListWidget()
+    return FutureBuilder(
+      future: this._listUser(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData == false) {
+          return Text('');
+        } else {
+          return this._buildUserListWidget(snapshot.data);
+        }
+      },
     );
   }
 }
