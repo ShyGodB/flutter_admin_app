@@ -5,7 +5,7 @@ import '../tech/info.dart';
 import '../user/info.dart';
 
 class OrderInfoPage extends StatefulWidget {
-  String arguments;
+  final String arguments;
   OrderInfoPage({Key key, this.arguments = ''}) : super(key: key);
 
   @override
@@ -15,35 +15,14 @@ class OrderInfoPage extends StatefulWidget {
 
 class _OrderInfoPageState extends State<OrderInfoPage> {
   String arguments;
-  Map order = {"orderId": '123'};
-  // Map record;
-  Map tech = {"realName": '123'};
-  Map user = {"realName": '123'};
-  // List calls;
   _OrderInfoPageState({Key key, this.arguments = ''});
 
-  @override
-  void initState() {
-    super.initState();
-    if (this.arguments != '') {
-      _getOrder().then((res) {
-        setState(() {
-          this.order = res['data']['order'];
-          // this.record = res['data']['record'];
-          this.tech = res['data']['tech'];
-          this.user = res['data']['user'];
-          // this.calls = res['data']['calls'];
-        });
-      });
-    }
-  }
-
-  dynamic _getOrder() async {
+  dynamic _getData() async {
     var res = await post('/order/detail', {"orderId": this.arguments});
     return res;
   }
 
-  Widget buildUserWidget() {
+  Widget buildUserWidget(data) {
     return ListView(
       children: <Widget>[
         Center(
@@ -53,7 +32,7 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
             child: CircleAvatar(
               radius: 50,
               child: Image.network(
-                this.user['headImg'],
+                data['headImg'],
                 width: 200.0, 
                 height: 200.0,
                 fit: BoxFit.cover,
@@ -64,19 +43,19 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
         Row(
           children: <Widget>[
             Text('姓名：'),
-            Text(this.user['realName'] ?? '暂无')
+            Text(data['realName'] ?? '暂无')
           ],
         ),
         Row(
           children: <Widget>[
             Text('性别：'),
-            Text(this.user['gender'].toString() ?? '女')
+            Text(data['gender'].toString() ?? '女')
           ],
         ),
         Row(
           children: <Widget>[
             Text('手机号：'),
-            Text(this.user['phone'] ?? '暂无')
+            Text(data['phone'] ?? '暂无')
           ],
         ),
         RaisedButton(
@@ -84,36 +63,36 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => UserInfoPage(
-                      arguments: this.user['userId'].toString(),
+                      arguments: data['userId'].toString(),
                     )));
             })
       ],
     );
   }
 
-  Widget buildOrderWidget() {
+  Widget buildOrderWidget(data) {
     return ListView(
       children: <Widget>[
         ListTile(
-          title: Text('订单编号: ${this.order['orderId']}')
+          title: Text('订单编号: ${data['orderId']}')
         ),
         ListTile(
-          title: Text('服务项目: ${this.order['projectsName']}')
+          title: Text('服务项目: ${data['projectsName']}')
         ),
         ListTile(
-          title: Text('服务费: ${this.order['payService']}')
+          title: Text('服务费: ${data['payService']}')
         ),
         ListTile(
-          title: Text('交通费: ${this.order['payTrans']}')
+          title: Text('交通费: ${data['payTrans']}')
         ),
         ListTile(
-          title: Text('下单时间: ${this.order['addTime']}')
+          title: Text('下单时间: ${data['addTime']}')
         ),
       ],
     );
   }
 
-  Widget buildTechWidget() {
+  Widget buildTechWidget(data) {
     return ListView(
       children: <Widget>[
         Center(
@@ -123,7 +102,7 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
             child: CircleAvatar(
               radius: 50,
               child: Image.network(
-                this.tech['headImg'],
+                data['headImg'],
                 width: 200.0, 
                 height: 200.0,
                 fit: BoxFit.cover,
@@ -134,19 +113,19 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
         Row(
           children: <Widget>[
             Text('姓名：'),
-            Text(this.tech['realName'] ?? '暂无')
+            Text(data['realName'] ?? '暂无')
           ],
         ),
         Row(
           children: <Widget>[
             Text('性别：'),
-            Text(this.tech['gender'].toString() ?? '女')
+            Text(data['gender'].toString() ?? '女')
           ],
         ),
         Row(
           children: <Widget>[
             Text('手机号：'),
-            Text(this.tech['phone'] ?? '暂无')
+            Text(data['phone'] ?? '暂无')
           ],
         ),
         RaisedButton(
@@ -154,15 +133,14 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => TechInfoPage(
-                      arguments: this.tech['techId'].toString(),
+                      arguments: data['techId'].toString(),
                     )));
             })
       ],
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildWidget(data) {
     return DefaultTabController(
         length: 3,
         child: Scaffold(
@@ -179,9 +157,23 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                   ]),
             ),
             body: TabBarView(children: <Widget>[
-              this.buildUserWidget(),
-              this.buildOrderWidget(),
-              this.buildTechWidget()
+              this.buildUserWidget(data['user']),
+              this.buildOrderWidget(data['order']),
+              this.buildTechWidget(data['tech'])
             ])));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: _getData(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData == false) {
+          return Text('');
+        } else {
+          return this._buildWidget(snapshot.data);
+        }
+      }
+    );
   }
 }
