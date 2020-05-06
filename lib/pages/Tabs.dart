@@ -23,10 +23,12 @@ class _TabState extends State<Tabs> {
     AppPage(),
   ];
 
+  List _titleList = ['主页', '订单', '用户', '技师', '应用'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('edtuina后台')),
+        appBar: AppBar(title: Text(this._titleList[this._currentIndex])),
         body: this._pageList[this._currentIndex],
         bottomNavigationBar: BottomNavigationBar(
           items: [
