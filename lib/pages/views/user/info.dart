@@ -1,7 +1,10 @@
 import 'package:flutter_admin_app/api/Index.dart';
 import 'package:flutter/material.dart';
 
-import '../tech/order.dart';
+import './order.dart';
+import './comment.dart';
+import './coupon.dart';
+import './review.dart';
 
 class UserInfoPage extends StatefulWidget {
   final String arguments;
@@ -32,7 +35,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
           children: <Widget>[
             Container(
               height: 160.0,
-              decoration: BoxDecoration(color: Colors.grey),
+              decoration: BoxDecoration(color: Colors.white),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -190,8 +193,8 @@ class _UserInfoPageState extends State<UserInfoPage> {
                       ),
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => TechOrderPage(
-                                arguments: data['userId'] ?? data['userId'].toString() ?? '',
+                          builder: (context) => UserOrderPage(
+                                arguments: data['userId'].toString() ?? '',
                               )));
                       },
                     ),
@@ -210,7 +213,10 @@ class _UserInfoPageState extends State<UserInfoPage> {
                         )
                       ),
                       onTap: () {
-                        print(123);
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => CommentOfTechToUserPage(
+                                arguments: data['userId'].toString() ?? '',
+                              )));
                       },
                     ),
                   ),
@@ -228,7 +234,10 @@ class _UserInfoPageState extends State<UserInfoPage> {
                         )
                       ),
                       onTap: () {
-                        print(123);
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => UserCouponPage(
+                                arguments: data['userId'].toString() ?? '',
+                              )));
                       },
                     ),
                   ),
@@ -246,7 +255,10 @@ class _UserInfoPageState extends State<UserInfoPage> {
                         )
                       ),
                       onTap: () {
-                        print(123);
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => UserReviewPage(
+                                arguments: data['userId'].toString() ?? '',
+                              )));
                       },
                     ),
                   ),

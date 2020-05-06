@@ -3,20 +3,32 @@ import 'package:flutter/material.dart';
 import '../../../api//Index.dart';
 
 class GrowtListPage extends StatefulWidget {
-  GrowtListPage({Key key}) : super(key: key);
+  final String arguments;
+  GrowtListPage({Key key, this.arguments = ''}) : super(key: key);
 
   @override
-  _GrowtListPageState createState() => _GrowtListPageState();
+  _GrowtListPageState createState() => _GrowtListPageState(arguments: this.arguments);
 }
 
 class _GrowtListPageState extends State<GrowtListPage> {
+  String arguments;
+  _GrowtListPageState({Key key, this.arguments = ''});
+
   _getData() async {
-    var res = await get('/tech/listGrowth');
-    return res;
+    var res = await post('/tech/listGrowth', { "techId": arguments });
+    return res['data']['list'];
   }
 
   Widget _buildWidget(data) {
     List<Widget> list = [];
+    if (data.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('成长记录'),
+        ),
+        body: Text('暂无数据')
+      );
+    }
     for (var item in data) {
       var column = Column(
         children: <Widget>[

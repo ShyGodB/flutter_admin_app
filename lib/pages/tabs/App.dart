@@ -41,14 +41,10 @@ class _AppPageState extends State<AppPage> {
             },
           ),
           InkWell(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  alignment: Alignment.center,
-                  color: Colors.blue,
-                  child: Text('充值记录')
-                )
-              ]
+            child: Container(
+              alignment: Alignment.center,
+              color: Colors.blue,
+              child: Text('充值记录')
             ),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(

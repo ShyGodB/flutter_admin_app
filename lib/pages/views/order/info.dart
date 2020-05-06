@@ -13,12 +13,21 @@ class OrderInfoPage extends StatefulWidget {
       _OrderInfoPageState(arguments: this.arguments);
 }
 
-class _OrderInfoPageState extends State<OrderInfoPage> {
+class _OrderInfoPageState extends State<OrderInfoPage>  with TickerProviderStateMixin {
   String arguments;
   _OrderInfoPageState({Key key, this.arguments = ''});
 
+  TabController _topTabController;
+  TabController _secondTabController;
+  @override
+  void initState() { 
+    super.initState();
+    _topTabController = new TabController(vsync: this, length: 3);
+    _secondTabController = new TabController(vsync: this, length: 3);
+  }
+
   dynamic _getData() async {
-    var res = await post('/order/list', {"orderId": this.arguments});
+    var res = await post('/order/detail', {"orderId": this.arguments});
     return res;
   }
 
@@ -167,11 +176,11 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
   Widget buildOrderWidget(data) {
     if (data == null) return Text('无订单信息');
 
-    return DefaultTabController(
-      length: 3, 
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
-          bottom: TabBar(
+          automaticallyImplyLeading: false,
+          title: TabBar(
+            controller: this._secondTabController,
             indicatorColor: Colors.orange,
             indicatorWeight: 3,
             tabs: <Widget>[
@@ -181,13 +190,14 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
             ],
           )
         ),
-        body: TabBarView(children: <Widget>[
-          this._buildOrderTimeWidget(data),
-          this._buildOrderDetailWidget(data),
-          this._buildPayInfoWidget(data)
-        ],)
-      )
-    );
+        body: TabBarView(
+          controller: this._secondTabController,
+          children: <Widget>[
+            this._buildOrderTimeWidget(data),
+            this._buildOrderDetailWidget(data),
+            this._buildPayInfoWidget(data)
+        ])
+      );
   }
 
   Widget buildTechWidget(data) {
@@ -235,29 +245,29 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
   }
 
   Widget _buildWidget(data) {
-    return DefaultTabController(
-        length: 3,
-        child: Scaffold(
-            appBar: AppBar(
-              title: Text('订单详情'),
-              centerTitle: true,
-              bottom: TabBar(
-                  indicatorColor: Colors.red,
-                  indicatorWeight: 3,
-                  tabs: <Widget>[
-                    Tab(text: '用户'),
-                    Tab(text: '订单'),
-                    Tab(text: '技师'),
-                  ]
-              ),
-            ),
-            body: TabBarView(children: <Widget>[
-              this.buildUserWidget(data['data']['user']),
-              this.buildOrderWidget(data['data']['order']),
-              this.buildTechWidget(data['data']['tech'])
-            ])
-        )
-    );
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('订单详情'),
+        centerTitle: true,
+        bottom: TabBar(
+          controller: this._topTabController,
+          indicatorColor: Colors.red,
+          indicatorWeight: 3,
+          tabs: <Widget>[
+            Tab(text: '用户'),
+            Tab(text: '订单'),
+            Tab(text: '技师'),
+          ]
+        ),
+      ),
+      body: TabBarView(
+        controller: this._topTabController,
+        children: <Widget>[
+          this.buildUserWidget(data['data']['user']),
+          this.buildOrderWidget(data['data']['order']),
+          this.buildTechWidget(data['data']['tech'])
+      ])
+  );
   }
 
   @override

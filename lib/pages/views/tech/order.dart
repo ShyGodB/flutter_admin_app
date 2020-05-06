@@ -16,12 +16,20 @@ class _TechOrderPageState extends State<TechOrderPage> {
   _TechOrderPageState({Key key, this.arguments = ''});
 
   _listOrder() async {
-    var res = await post('/order/list', { "userId": this.arguments });
-    return res;
+    var res = await post('/order/list', { "techId": this.arguments });
+    return res['data']['list'];
   }
 
   Widget _buildOrderListWidget(data) {
     List<Widget> list = [];
+    if (data.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('用户历史订单'),
+        ),
+        body: Text('暂无数据')
+      );
+    }
     for (var item in data) {
       var column = Column(
         children: <Widget>[
@@ -44,7 +52,14 @@ class _TechOrderPageState extends State<TechOrderPage> {
                     )));
           }));
     }
-    return ListView(children: list);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('用户历史订单'),
+      ),
+      body: ListView(
+        children: list
+      )
+    );
   }
 
   @override
