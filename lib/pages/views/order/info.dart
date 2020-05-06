@@ -18,7 +18,7 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
   _OrderInfoPageState({Key key, this.arguments = ''});
 
   dynamic _getData() async {
-    var res = await post('/order/detail', {"orderId": this.arguments});
+    var res = await post('/order/list', {"orderId": this.arguments});
     return res;
   }
 
@@ -79,11 +79,17 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
             children: <Widget>[
               Column(children: <Widget>[
                 Text('现场照片'),
-                Image.network(data['sceneImg'] ?? 'http://pictest.edtuina.com/activity/1588750996086ihpp.png')
+                Image.network(
+                  data['sceneImg'] ?? 'http://pictest.edtuina.com/activity/1588750996086ihpp.png',
+                  width: 160
+                )
               ]),
               Column(children: <Widget>[
                 Text('用户签名'),
-                Image.network(data['userSign'] ?? 'http://pictest.edtuina.com/activity/1588750996086ihpp.png')
+                Image.network(
+                  data['userSign'] ?? 'http://pictest.edtuina.com/activity/1588750996086ihpp.png',
+                  width: 160
+                )
               ]),
             ]
           )

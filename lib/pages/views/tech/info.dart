@@ -28,7 +28,9 @@ class _TechInfoPageState extends State<TechInfoPage> {
         children: <Widget>[
           Container(
             height: 200.0,
+            decoration: BoxDecoration(color: Colors.blueGrey),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Center(
                   child: Container(
@@ -44,18 +46,22 @@ class _TechInfoPageState extends State<TechInfoPage> {
                 Text('手机系统: 未知'),
                 Row(
                   children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        Text("¥ 0"),
-                        Text('账户余额')
-                      ]
+                    Expanded(
+                      child: Column(
+                        children: <Widget>[
+                          Text("¥ 0"),
+                          Text('账户余额')
+                        ]
+                      ),
                     ),
-                    Column(
-                      children: <Widget>[
-                        Text("¥ 0"),
-                        Text('总收入')
-                      ]
-                    ),
+                    Expanded(
+                      child: Column(
+                        children: <Widget>[
+                          Text("¥ 0"),
+                          Text('总收入')
+                        ]
+                      ),
+                    )
                   ]
                 )
               ],
@@ -73,10 +79,10 @@ class _TechInfoPageState extends State<TechInfoPage> {
             leading: Icon(Icons.ac_unit),
             title: Text('邀请奖励 0'),
           ),
-            ListTile(
-              leading: Icon(Icons.ac_unit),
-              title: Text("手机号 ${data['phone'] ?? '暂无'}"),
-            ),
+          ListTile(
+            leading: Icon(Icons.ac_unit),
+            title: Text("手机号 ${data['phone'] ?? '暂无'}"),
+          ),
           ListTile(
             leading: Icon(Icons.ac_unit),
             title: Text("生日 ${data['birthday'] ?? '未知'}"),
