@@ -157,9 +157,9 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                   ]),
             ),
             body: TabBarView(children: <Widget>[
-              this.buildUserWidget(data['user']),
-              this.buildOrderWidget(data['order']),
-              this.buildTechWidget(data['tech'])
+              this.buildUserWidget(data['data']['user']),
+              this.buildOrderWidget(data['data']['order']),
+              this.buildTechWidget(data['data']['tech'])
             ])));
   }
 
