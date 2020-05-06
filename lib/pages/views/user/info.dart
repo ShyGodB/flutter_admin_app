@@ -29,22 +29,24 @@ class _UserInfoPageState extends State<UserInfoPage> {
         body: ListView(
           children: <Widget>[
             Container(
-              height: 160.0,
-              child: Column(
-                children: <Widget>[
-                  Center(
+            height: 160.0,
+            child: Column(
+              children: <Widget>[
+                Center(
+                  child: Container(
+                    width: 80,
+                    height: 80,
                     child: CircleAvatar(
-                      child: Image.network(
-                        data['headImg'], 
-                        fit: BoxFit.cover
-                      )
+                      radius: 60,
+                      backgroundImage: NetworkImage(data['headImg'])
                     )
-                  ),
-                  Text(data['realName'] ?? data['nickName' ?? '暂无姓名']),
-                  Text('手机系统: 未知')
-                ],
-              ),
+                  )
+                ),
+                Text(data['realName'] ?? '暂无姓名'),
+                Text('手机系统: 未知')
+              ],
             ),
+          ),
             ListTile(
               leading: Icon(Icons.ac_unit),
               title: Text('充值余额 0'),

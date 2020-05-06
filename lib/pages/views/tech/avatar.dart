@@ -19,7 +19,7 @@ class _AvatarListPageState extends State<AvatarListPage> {
     List<Widget> list = [];
     for (var item in data) {
       var column = ListTile(
-          leading: CircleAvatar(child: Image.network(item['avatar'])),
+          leading: CircleAvatar(backgroundImage: NetworkImage(item['avatar'])),
           title: Text("技师姓名：${item['techName'] ?? ''} ( ${item['state'] ?? '审核中'} )"),
           subtitle: Text("上传时间：${item['createdAt'] ?? ''}"),
       );

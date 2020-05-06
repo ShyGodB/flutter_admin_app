@@ -27,16 +27,37 @@ class _TechInfoPageState extends State<TechInfoPage> {
         body: ListView(
         children: <Widget>[
           Container(
-            height: 160.0,
+            height: 200.0,
             child: Column(
               children: <Widget>[
                 Center(
-                  child: CircleAvatar(
-                    child: Image.network(data['headImg'], fit: BoxFit.cover)
+                  child: Container(
+                    width: 80,
+                    height: 80,
+                    child: CircleAvatar(
+                      radius: 60,
+                      backgroundImage: NetworkImage(data['headImg'])
+                    )
                   )
                 ),
                 Text(data['realName'] ?? data['nickName' ?? '暂无姓名']),
-                Text('手机系统: 未知')
+                Text('手机系统: 未知'),
+                Row(
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Text("¥ 0"),
+                        Text('账户余额')
+                      ]
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Text("¥ 0"),
+                        Text('总收入')
+                      ]
+                    ),
+                  ]
+                )
               ],
             ),
           ),
