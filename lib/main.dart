@@ -9,11 +9,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            primaryColor: Colors.lightBlue,
-            textSelectionColor: Colors.red,
-            selectedRowColor: Colors.red,
-            unselectedWidgetColor: Colors.white,
-            backgroundColor: Colors.blueGrey,
+            primaryColor: Colors.black,
+            // textSelectionColor: Colors.red,
+            // selectedRowColor: Colors.red,
+            // unselectedWidgetColor: Colors.white,
+            backgroundColor: Colors.black,
         ),
         initialRoute: '/',
         onGenerateRoute: onGenerateRoute,

@@ -12,8 +12,10 @@ class TechPage extends StatefulWidget {
 }
 
 class _TechPageState extends State<TechPage> {
+    Map form = { "pageIndex": 1, "pageSize": 10 };
+
     _listTech() async {
-        var res = await get('/tech/list');
+        var res = await post('/tech/list', form);
         return res['data']['list'];
     }
 

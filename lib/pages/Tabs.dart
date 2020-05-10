@@ -25,24 +25,6 @@ class _TabState extends State<Tabs> {
 
   List _titleList = ['主页', '订单', '用户', '技师', '应用'];
 
-    List<Widget> _getFirstDropdownButtonItems(title) {
-        List<DropdownMenuItem> list = [];
-        if (title == '订单') {
-            list.add(DropdownMenuItem(child: Text('当前订单'), value: '当前订单'));
-            list.add(DropdownMenuItem(child: Text('历史订单'), value: '当前订单'));
-        }
-        return list;
-    }
-
-    List<Widget> _getSecondDropdownButtonItems(title) {
-        List<DropdownMenuItem> list = [];
-        if (title == '订单') {
-            list.add(DropdownMenuItem(child: Text('当前订单'), value: '当前订单'));
-            list.add(DropdownMenuItem(child: Text('历史订单'), value: '当前订单'));
-        }
-        return list;
-    }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
