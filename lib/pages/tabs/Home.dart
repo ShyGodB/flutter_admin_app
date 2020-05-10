@@ -14,18 +14,20 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
     Map form = { "pageIndex": 1, "pageSize": 10 };
 
-    Map week;
     _getData() async {
-        var res = await get('/index/data', form);
-        this.week = {
-            "day": res['data']['week'].map((item) => item['time']),
-            "orders": res['data']['week'].map((item) => item['totalOrder']),
-            "pay": res['data']['week'].map((item) => item['turnover']),
-        };
-        return week;
+        var res = await post('/index/data', form);
+        return res;
     }
 
-    _getEchart() {
+    _getEchart(week) {
+        List times = [];
+        List orders = [];
+        List turnover = [];
+        week.forEach((item) {
+            times.add(item['time']);
+            orders.add(item['totalOrder']);
+            turnover.add(item['turnover']);
+        });
         return Echarts(
             option: '''
                 {
@@ -48,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                     },
                     xAxis: {
                         type: 'category',
-                        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                        data: $times
                     },
                     yAxis: [
                         {
@@ -67,18 +69,18 @@ class _HomePageState extends State<HomePage> {
                         name: '单量',
                         yAxisIndex: 1,
                         type: 'line',
-                        data: [10, 20, 30, 40, 50, 60, 70],
+                        data: $orders
                     }, {
                         name: '交易额',
                         type: 'bar',
-                        data: [100, 200, 300, 400, 500, 600, 700]
+                        data: $turnover
                     }]
                 }
             ''',
         );
     }
 
-    Widget _getUserTech() {
+    Widget _getUserTech(userCount, techCount) {
         return Row(children: <Widget>[
             Expanded(
                 child: Container(
@@ -91,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: Column(children: <Widget>[
                         Text('总用户人数', style: TextStyle(color: Colors.white)),
-                        Text('36384', style: TextStyle(color: Colors.white)),
+                        Text('$userCount', style: TextStyle(color: Colors.white)),
                     ],),
                 )
             ),
@@ -107,14 +109,14 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: Column(children: <Widget>[
                         Text('总技师人数', style: TextStyle(color: Colors.white)),
-                        Text('376', style: TextStyle(color: Colors.white)),
+                        Text('$techCount', style: TextStyle(color: Colors.white)),
                     ],),
                 )
             )
         ],);
     }
 
-    Widget _getBottomWidget() {
+    Widget _getBottomWidget(today, yesterday, total) {
         return Column(children: <Widget>[
             Container(
                 padding: EdgeInsets.all(10.0),
@@ -128,21 +130,21 @@ class _HomePageState extends State<HomePage> {
                     Container(height: 30, child: VerticalDivider(color: Colors.grey)),
                     Expanded(
                         child: Column(children: <Widget>[
-                            Text('12312'),
+                            Text("${today['turnover']}"),
                             Text('今日'),
                         ],)
                     ),
                     Container(height: 30, child: VerticalDivider(color: Colors.grey)),
                     Expanded(
                         child: Column(children: <Widget>[
-                            Text('13212'),
+                            Text("${yesterday['turnover']}"),
                             Text('昨日'),
                         ],)
                     ),
                     Container(height: 30, child: VerticalDivider(color: Colors.grey)),
                     Expanded(
                         child: Column(children: <Widget>[
-                            Text('2591万'),
+                            Text("${total['turnover']}"),
                             Text('累计'),
                         ],)
                     ),
@@ -160,21 +162,21 @@ class _HomePageState extends State<HomePage> {
                     Container(height: 30, child: VerticalDivider(color: Colors.grey)),
                     Expanded(
                         child: Column(children: <Widget>[
-                            Text('12312'),
+                            Text("${today['totalOrder']}"),
                             Text('今日'),
                         ],)
                     ),
                     Container(height: 30, child: VerticalDivider(color: Colors.grey)),
                     Expanded(
                         child: Column(children: <Widget>[
-                            Text('13212'),
+                            Text("${yesterday['totalOrder']}"),
                             Text('昨日'),
                         ],)
                     ),
                     Container(height: 30, child: VerticalDivider(color: Colors.grey)),
                     Expanded(
                         child: Column(children: <Widget>[
-                            Text('2591万'),
+                            Text("${total['totalOrder']}"),
                             Text('累计'),
                         ],)
                     ),
@@ -192,21 +194,21 @@ class _HomePageState extends State<HomePage> {
                     Container(height: 30, child: VerticalDivider(color: Colors.grey)),
                     Expanded(
                         child: Column(children: <Widget>[
-                            Text('12312'),
+                            Text("${today['overTimeOrder']}"),
                             Text('今日'),
                         ],)
                     ),
                     Container(height: 30, child: VerticalDivider(color: Colors.grey)),
                     Expanded(
                         child: Column(children: <Widget>[
-                            Text('13212'),
+                            Text("${yesterday['overTimeOrder']}"),
                             Text('昨日'),
                         ],)
                     ),
                     Container(height: 30, child: VerticalDivider(color: Colors.grey)),
                     Expanded(
                         child: Column(children: <Widget>[
-                            Text('2591万'),
+                            Text("${total['overTimeOrder']}"),
                             Text('累计'),
                         ],)
                     ),
@@ -224,21 +226,21 @@ class _HomePageState extends State<HomePage> {
                     Container(height: 30, child: VerticalDivider(color: Colors.grey)),
                     Expanded(
                         child: Column(children: <Widget>[
-                            Text('12312'),
+                            Text("${today['cancelOrder']}"),
                             Text('今日'),
                         ],)
                     ),
                     Container(height: 30, child: VerticalDivider(color: Colors.grey)),
                     Expanded(
                         child: Column(children: <Widget>[
-                            Text('13212'),
+                            Text("${yesterday['cancelOrder']}"),
                             Text('昨日'),
                         ],)
                     ),
                     Container(height: 30, child: VerticalDivider(color: Colors.grey)),
                     Expanded(
                         child: Column(children: <Widget>[
-                            Text('2591万'),
+                            Text("${total['cancelOrder']}"),
                             Text('累计'),
                         ],)
                     ),
@@ -256,21 +258,21 @@ class _HomePageState extends State<HomePage> {
                     Container(height: 30, child: VerticalDivider(color: Colors.grey)),
                     Expanded(
                         child: Column(children: <Widget>[
-                            Text('12312'),
+                            Text("${today['transFee']}"),
                             Text('今日'),
                         ],)
                     ),
                     Container(height: 30, child: VerticalDivider(color: Colors.grey)),
                     Expanded(
                         child: Column(children: <Widget>[
-                            Text('13212'),
+                            Text("${yesterday['transFee']}"),
                             Text('昨日'),
                         ],)
                     ),
                     Container(height: 30, child: VerticalDivider(color: Colors.grey)),
                     Expanded(
                         child: Column(children: <Widget>[
-                            Text('2591万'),
+                            Text("${total['transFee']}"),
                             Text('累计'),
                         ],)
                     ),
@@ -288,21 +290,21 @@ class _HomePageState extends State<HomePage> {
                     Container(height: 30, child: VerticalDivider(color: Colors.grey)),
                     Expanded(
                         child: Column(children: <Widget>[
-                            Text('12312'),
+                            Text("${today['couponFee']}"),
                             Text('今日'),
                         ],)
                     ),
                     Container(height: 30, child: VerticalDivider(color: Colors.grey)),
                     Expanded(
                         child: Column(children: <Widget>[
-                            Text('13212'),
+                            Text("${yesterday['couponFee']}"),
                             Text('昨日'),
                         ],)
                     ),
                     Container(height: 30, child: VerticalDivider(color: Colors.grey)),
                     Expanded(
                         child: Column(children: <Widget>[
-                            Text('2591万'),
+                            Text("${total['couponFee']}"),
                             Text('累计'),
                         ],)
                     ),
@@ -311,19 +313,25 @@ class _HomePageState extends State<HomePage> {
         ],);
     }
 
-    Widget _buildWidget() {
+    Widget _buildWidget(res) {
+        var week = res['data']['week'];
+        var today = res['data']['today'];
+        var yesterday = res['data']['yesterday'];
+        var total = res['data']['total'];
+        var userCount = res['data']['userCount'];
+        var techCount = res['data']['techCount'];
         return Column(children: <Widget>[
             Container(
                 height: 150,
-                child: this._getEchart()
+                child: this._getEchart(week)
             ),
             Container(
                 padding: EdgeInsets.all(20.0),
-                child: this._getUserTech()
+                child: this._getUserTech(userCount, techCount)
             ),
             Container(
                 padding: EdgeInsets.all(20.0),
-                child: this._getBottomWidget()
+                child: this._getBottomWidget(today, yesterday, total)
             )
 
         ]);
@@ -338,8 +346,8 @@ class _HomePageState extends State<HomePage> {
                     return Center(child: CircularProgressIndicator());
                 } else {
                     return Container(
-                            child: this._buildWidget(),
-                        );
+                        child: this._buildWidget(snapshot.data),
+                    );
                 }
             },
         );
