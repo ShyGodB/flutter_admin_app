@@ -4,12 +4,19 @@ import 'package:flutter/material.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+    @override
+    Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      onGenerateRoute: onGenerateRoute,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            primaryColor: Colors.lightBlue,
+            textSelectionColor: Colors.red,
+            selectedRowColor: Colors.red,
+            unselectedWidgetColor: Colors.white,
+            backgroundColor: Colors.blueGrey,
+        ),
+        initialRoute: '/',
+        onGenerateRoute: onGenerateRoute,
     );
   }
 }

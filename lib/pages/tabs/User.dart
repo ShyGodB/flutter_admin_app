@@ -12,31 +12,31 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-  _listUser() async {
-    var res = await get('/user/list');
-    return res;
-  }
+    Map form = { "pageIndex": 1, "pageSize": 10 };
+    _listUser() async {
+        var res = await post('/user/list', form);
+        return res['data']['list'];
+    }
 
   Widget _buildUserListWidget(data) {
     List<Widget> list = [];
     for (var user in data) {
-      var column = Column(
-        children: <Widget>[
-          ListTile(title: Text("用户姓名：${user['realName'] ?? user['nickName'] ?? ''}")),
-          ListTile(title: Text("手机号：${user['phone'] ?? '暂无'}")),
-        ],
-      );
-      list.add(InkWell(
-          child: Card(
-            margin: EdgeInsets.all(10.0),
-            child: column,
-          ),
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => UserInfoPage(
-                      arguments: user['userId'].toString(),
-                    )));
-          }));
+        var column = ListTile(
+            leading: CircleAvatar(backgroundImage: NetworkImage(user['headImg']),),
+            title: Text("${user['realName'] ?? user['nickName']}   ${user['gender']}  ${user['phone']}"),
+            subtitle: Text("${user['regTime']}    状态 ${user['state']}")
+        );  
+        list.add(InkWell(
+            child: Card(
+                margin: EdgeInsets.all(10.0),
+                child: column,
+            ),
+            onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => UserInfoPage(
+                        arguments: user['userId'].toString(),
+                        )));
+            }));
     }
     return ListView(
       children: list
