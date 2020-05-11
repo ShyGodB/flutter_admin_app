@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../api/Index.dart';
 
 import '../views/order/info.dart';
-import '../../service/order.dart';
 
 class OrderPage extends StatefulWidget {
     OrderPage({Key key}) : super(key: key);
@@ -101,25 +100,25 @@ class _OrderPageState extends State<OrderPage> {
                                     ),
                                     elevation: 24,
                                     onChanged: (value) {
-                                        if (value == '接单') {
-                                            orderAction('/order/accept', { "orderId": item['orderId'] });
-                                            print('确定帮助技师接单?');
-                                        } else if (value == '出发') {
-                                            orderAction('/order/leave', { "orderId": item['orderId'] });
-                                            print('确定帮助技师出发?');
-                                        } else if (value == '到达') {
-                                            orderAction('/order/arrive', { "orderId": item['orderId'] });
-                                            print('确定帮助技师到达?');
-                                        } else if (value == '开始') {
-                                            orderAction('/order/start', { "orderId": item['orderId'] });
-                                            print('确定开始?');
-                                        } else if (value == '完成') {
-                                            orderAction('/order/end', { "orderId": item['orderId'] });
-                                            print('确定服务完成?');
-                                        } else if (value == '取消') {
-                                            orderAction('/order/cancel', { "orderId": item['orderId'] });
-                                            print('确定取消此订单?');
-                                        }
+                                        // if (value == '接单') {
+                                        //     orderAction('/order/accept', { "orderId": item['orderId'] });
+                                        //     print('确定帮助技师接单?');
+                                        // } else if (value == '出发') {
+                                        //     orderAction('/order/leave', { "orderId": item['orderId'] });
+                                        //     print('确定帮助技师出发?');
+                                        // } else if (value == '到达') {
+                                        //     orderAction('/order/arrive', { "orderId": item['orderId'] });
+                                        //     print('确定帮助技师到达?');
+                                        // } else if (value == '开始') {
+                                        //     orderAction('/order/start', { "orderId": item['orderId'] });
+                                        //     print('确定开始?');
+                                        // } else if (value == '完成') {
+                                        //     orderAction('/order/end', { "orderId": item['orderId'] });
+                                        //     print('确定服务完成?');
+                                        // } else if (value == '取消') {
+                                        //     orderAction('/order/cancel', { "orderId": item['orderId'] });
+                                        //     print('确定取消此订单?');
+                                        // }
                                     },
                                 ) : Container()
                             ],

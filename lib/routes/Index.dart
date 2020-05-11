@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_admin_app/pages/Tabs.dart';
+import 'package:flutter_admin_app/pages/tabs.dart';
 import 'package:flutter_admin_app/pages/tabs/Home.dart';
 import 'package:flutter_admin_app/pages/tabs/Order.dart';
 import 'package:flutter_admin_app/pages/tabs/User.dart';
