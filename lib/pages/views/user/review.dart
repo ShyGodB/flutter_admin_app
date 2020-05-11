@@ -13,8 +13,11 @@ class _UserReviewPageState extends State<UserReviewPage> {
   String arguments;
   _UserReviewPageState({Key key, this.arguments = ''});
 
+  Map form = { "pageIndex": 1, "pageSize": 10 };
+
   _getData() async {
-    var res = await post('/review/list', { "userId": this.arguments });
+    if (arguments != '') form['userId'] = arguments;
+    var res = await post('/review/list', form);
     return res['data']['list'];
   }
 

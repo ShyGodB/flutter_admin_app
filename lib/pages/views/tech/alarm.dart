@@ -13,8 +13,8 @@ class _AlarmListPageState extends State<AlarmListPage> {
     Map form = { "pageIndex": 1, "pageSize": 10 };
 
     _getData() async {
-        var res = await get('/alarm/list', form);
-        return res;
+        var res = await post('/alarm/list', form);
+        return res['data']['list'];
     }
 
     Widget _buildWidget(data) {

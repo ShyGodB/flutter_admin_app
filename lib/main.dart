@@ -9,13 +9,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primaryColor: Colors.black,
+          primaryColor: Colors.blue,
           textSelectionColor: Colors.red,
           selectedRowColor: Colors.red,
           unselectedWidgetColor: Colors.white,
           backgroundColor: Colors.black,
       ),
-      initialRoute: '/login',
+      initialRoute: '/',
       onGenerateRoute: onGenerateRoute,
     );
   }

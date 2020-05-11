@@ -12,8 +12,8 @@ class RechargeListPage extends StatefulWidget {
 class _RechargeListPageState extends State<RechargeListPage> {
     Map form = { "pageIndex": 1, "pageSize": 10 };
     _getData() async {
-        var res = await get('/user/listRecharge', form);
-        return res;
+        var res = await post('/user/listRecharge', form);
+        return res['data']['list'];
     }
 
     Widget _buildWidget(data) {

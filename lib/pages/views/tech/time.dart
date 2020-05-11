@@ -12,7 +12,7 @@ class TimeListPage extends StatefulWidget {
 class _TimeListPageState extends State<TimeListPage> {
   _getData() async {
     var res = await post('/tech/listAcceptTimes', { "date": "2020-05-02" });
-    return res;
+    return res['data']['list'];
   }
 
   Widget _buildWidget(data) {

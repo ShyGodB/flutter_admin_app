@@ -18,18 +18,20 @@ class _LoginPagetate extends State<LoginPage> {
           fit: BoxFit.fill
         )
       ),
-      child: Form(
-        child: Column(
-          children: <Widget>[
-            RaisedButton(
-              child: Text('登陆', style: TextStyle(color: Colors.white)),
-              color: Colors.blue,
-              onPressed: () {
-                print('点击登陆按钮');
-              },
-            )
-          ],
-        ),
+      child: Center(
+        child: Form(
+          child: Column(
+            children: <Widget>[
+              RaisedButton(
+                child: Text('登陆', style: TextStyle(color: Colors.white)),
+                color: Colors.blue,
+                onPressed: () {
+                  print('点击登陆按钮');
+                },
+              )
+            ],
+          ),
+        )
       )
     );
   }

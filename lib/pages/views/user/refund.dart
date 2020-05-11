@@ -13,7 +13,7 @@ class _RefundListPageState extends State<RefundListPage> {
     Map form = { "pageIndex": 1, "pageSize": 10 };
 
     _listRefund() async {
-        var res = await get('/refund/list', form);
+        var res = await post('/refund/list', form);
         return res['data']['list'];
     }
 

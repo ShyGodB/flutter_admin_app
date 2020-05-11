@@ -13,8 +13,8 @@ class _AvatarListPageState extends State<AvatarListPage> {
     Map form = { "pageIndex": 1, "pageSize": 10 };
 
     _getData() async {
-        var res = await get('/tech/listAvatar', form);
-        return res;
+        var res = await post('/tech/listAvatar', form);
+        return res['data']['list'];
     }
 
     Widget _buildWidget(data) {
