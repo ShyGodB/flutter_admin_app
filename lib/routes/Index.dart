@@ -6,6 +6,7 @@ import 'package:flutter_admin_app/pages/tabs/Order.dart';
 import 'package:flutter_admin_app/pages/tabs/User.dart';
 import 'package:flutter_admin_app/pages/tabs/Tech.dart';
 import 'package:flutter_admin_app/pages/tabs/App.dart';
+import 'package:flutter_admin_app/pages/Login.dart';
 
 final routes = {
   '/': (context) => Tabs(),
@@ -14,6 +15,7 @@ final routes = {
   '/user': (context) => UserPage(),
   '/tech': (context) => TechPage(),
   '/app': (context) => AppPage(),
+  '/login': (context) => LoginPage(),
 };
 
 dynamic onGenerateRoute = (RouteSettings settings) {

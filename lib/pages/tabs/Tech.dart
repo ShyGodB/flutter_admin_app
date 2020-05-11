@@ -23,7 +23,7 @@ class _TechPageState extends State<TechPage> {
         List<Widget> list = [];
         for (var item in data) {
             var column = ListTile(
-                leading: CircleAvatar(backgroundImage: NetworkImage(item['headImg']),),
+                leading: item['headImg'] == null ?  Text('暂无头像') : CircleAvatar(backgroundImage: NetworkImage(item['headImg']),),
                 title: Text("${item['realName']}    ${item['gender']}    ${item['phone']}   ${item['techState']['name']}"),
                 subtitle: Text("${item['orders']}    ${item['clicks']}   ${item['state']}")
             );  

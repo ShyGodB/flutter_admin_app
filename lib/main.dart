@@ -7,16 +7,16 @@ class MyApp extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-            primaryColor: Colors.black,
-            // textSelectionColor: Colors.red,
-            // selectedRowColor: Colors.red,
-            // unselectedWidgetColor: Colors.white,
-            backgroundColor: Colors.black,
-        ),
-        initialRoute: '/',
-        onGenerateRoute: onGenerateRoute,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          primaryColor: Colors.black,
+          textSelectionColor: Colors.red,
+          selectedRowColor: Colors.red,
+          unselectedWidgetColor: Colors.white,
+          backgroundColor: Colors.black,
+      ),
+      initialRoute: '/login',
+      onGenerateRoute: onGenerateRoute,
     );
   }
 }
