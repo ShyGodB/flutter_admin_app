@@ -10,8 +10,9 @@ class TimeListPage extends StatefulWidget {
 }
 
 class _TimeListPageState extends State<TimeListPage> {
+  Map form = { "pageIndex": 1, "pageSize": 10 };
   _getData() async {
-    var res = await post('/tech/listAcceptTimes', { "date": "2020-05-02" });
+    var res = await post('/tech/listAcceptTimes', form);
     return res['data']['list'];
   }
 
