@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'tabs/Home.dart';
-import 'tabs/Order.dart';
-import 'tabs/User.dart';
-import 'tabs/Tech.dart';
-import 'tabs/App.dart';
+import 'home/home.dart';
+import 'order/order_list.dart';
+import 'user/user_list.dart';
+import 'tech/tech_list.dart';
+import 'app/app.dart';
 
 class Tabs extends StatefulWidget {
   Tabs({Key key}) : super(key: key);
@@ -16,10 +16,10 @@ class Tabs extends StatefulWidget {
 class _TabState extends State<Tabs> {
   int _currentIndex = 0;
   List _pageList = [
-    HomePage(),
-    OrderPage(),
-    UserPage(),
-    TechPage(),
+    Home(),
+    OrderList(),
+    UserList(),
+    TechList(),
     AppPage(),
   ];
 

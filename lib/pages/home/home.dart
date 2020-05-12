@@ -4,14 +4,14 @@ import 'package:flutter_echarts/flutter_echarts.dart';
 import '../../api/Index.dart';
 
 
-class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+class Home extends StatefulWidget {
+  Home({Key key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomeState createState() => _HomeState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeState extends State<Home> {
     Map form = { "pageIndex": 1, "pageSize": 10 };
 
     _getData() async {

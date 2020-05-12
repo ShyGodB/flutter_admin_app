@@ -4,14 +4,14 @@ import '../../api/Index.dart';
 
 import '../views/tech/info.dart';
 
-class TechPage extends StatefulWidget {
-  TechPage({Key key}) : super(key: key);
+class TechList extends StatefulWidget {
+  TechList({Key key}) : super(key: key);
 
   @override
-  _TechPageState createState() => _TechPageState();
+  _TechListState createState() => _TechListState();
 }
 
-class _TechPageState extends State<TechPage> {
+class _TechListState extends State<TechList> {
     Map form = { "pageIndex": 1, "pageSize": 10 };
 
     _listTech() async {

@@ -4,14 +4,14 @@ import '../../api//Index.dart';
 
 import '../views/user/info.dart';
 
-class UserPage extends StatefulWidget {
-  UserPage({Key key}) : super(key: key);
+class UserList extends StatefulWidget {
+  UserList({Key key}) : super(key: key);
 
   @override
-  _UserPageState createState() => _UserPageState();
+  _UserListState createState() => _UserListState();
 }
 
-class _UserPageState extends State<UserPage> {
+class _UserListState extends State<UserList> {
     Map form = { "pageIndex": 1, "pageSize": 10 };
     _listUser() async {
         var res = await post('/user/list', form);

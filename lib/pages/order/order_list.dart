@@ -3,14 +3,14 @@ import '../../api/Index.dart';
 
 import '../views/order/info.dart';
 
-class OrderPage extends StatefulWidget {
-    OrderPage({Key key}) : super(key: key);
+class OrderList extends StatefulWidget {
+    OrderList({Key key}) : super(key: key);
 
     @override
-    _OrderPageState createState() => _OrderPageState();
+    _OrderListState createState() => _OrderListState();
 }
 
-class _OrderPageState extends State<OrderPage> {
+class _OrderListState extends State<OrderList> {
     ScrollController _controller = new ScrollController();
     bool ifLoading = false;
     Map form = { "pageIndex": 1, "pageSize": 10 };

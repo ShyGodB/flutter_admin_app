@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_admin_app/pages/tabs.dart';
-import 'package:flutter_admin_app/pages/tabs/Home.dart';
-import 'package:flutter_admin_app/pages/tabs/Order.dart';
-import 'package:flutter_admin_app/pages/tabs/User.dart';
-import 'package:flutter_admin_app/pages/tabs/Tech.dart';
-import 'package:flutter_admin_app/pages/tabs/App.dart';
+// import 'package:flutter_admin_app/pages/home/home.dart';
+// import 'package:flutter_admin_app/pages/order/order_list.dart';
+// import 'package:flutter_admin_app/pages/user/user_list.dart';
+// import 'package:flutter_admin_app/pages/tech/tech_list.dart';
+// import 'package:flutter_admin_app/pages/app/app.dart';
 import 'package:flutter_admin_app/pages/Login.dart';
 
 final routes = {
   '/': (context) => Tabs(),
-  '/home': (context) => HomePage(),
-  '/order': (context) => OrderPage(),
-  '/user': (context) => UserPage(),
-  '/tech': (context) => TechPage(),
-  '/app': (context) => AppPage(),
   '/login': (context) => LoginPage(),
 };
 
