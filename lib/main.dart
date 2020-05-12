@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
         textSelectionColor: Colors.red,
         selectedRowColor: Colors.red,
         unselectedWidgetColor: Colors.white,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.grey,
       ),
       initialRoute: '/',
       onGenerateRoute: onGenerateRoute,
