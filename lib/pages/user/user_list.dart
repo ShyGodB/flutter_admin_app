@@ -73,35 +73,44 @@ class _TechListState extends State<UserList> {
         if (snapshot.hasData == false) {
             return Center(child: CircularProgressIndicator());
         } else {
-          return Container(
-            padding: EdgeInsets.all(10),
-            margin: EdgeInsets.only(bottom: 10),
-            color: Color(0xffeeeeee),
-            child: Stack(
-              children: <Widget>[
-                RefreshIndicator(
-                  backgroundColor: Colors.blue,
-                  child: ListView.builder(
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      return UserItem(
-                        userId: this.data[index]['userId'].toString(),
-                        realName: this.data[index]['realName'].toString(),
-                        nickName: this.data[index]['nickName'].toString(),
-                        phone: this.data[index]['phone'].toString(),
-                        gender: this.data[index]['gender'].toString(),
-                        headImg: this.data[index]['headImg'].toString(),
-                        state: this.data[index]['state'].toString(),
-                        amount: this.data[index]['amount'].toString(),
-                        regTime: this.data[index]['regTime'].toString(),
-                      );
-                    },
-                    controller: _controller,
-                  ),
-                  onRefresh: this._refresh,
-                ),
-                ifLoading ? Center(child: CircularProgressIndicator()) : Container()
+          return Scaffold(
+            appBar: AppBar(
+              centerTitle: true,
+              title: Text('用户'),
+              actions: <Widget>[
+                Icon(Icons.search)
               ],
+            ),
+            body: Container(
+              padding: EdgeInsets.all(10),
+              margin: EdgeInsets.only(bottom: 10),
+              color: Color(0xffeeeeee),
+              child: Stack(
+                children: <Widget>[
+                  RefreshIndicator(
+                    backgroundColor: Colors.blue,
+                    child: ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        return UserItem(
+                          userId: this.data[index]['userId'].toString(),
+                          realName: this.data[index]['realName'].toString(),
+                          nickName: this.data[index]['nickName'].toString(),
+                          phone: this.data[index]['phone'].toString(),
+                          gender: this.data[index]['gender'].toString(),
+                          headImg: this.data[index]['headImg'].toString(),
+                          state: this.data[index]['state'].toString(),
+                          amount: this.data[index]['amount'].toString(),
+                          regTime: this.data[index]['regTime'].toString(),
+                        );
+                      },
+                      controller: _controller,
+                    ),
+                    onRefresh: this._refresh,
+                  ),
+                  ifLoading ? Center(child: CircularProgressIndicator()) : Container()
+                ],
+              )
             )
           );
         }

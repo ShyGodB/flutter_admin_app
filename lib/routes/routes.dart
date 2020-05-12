@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_admin_app/pages/tabs.dart';
-// import 'package:flutter_admin_app/pages/home/home.dart';
-// import 'package:flutter_admin_app/pages/order/order_list.dart';
-// import 'package:flutter_admin_app/pages/user/user_list.dart';
-// import 'package:flutter_admin_app/pages/tech/tech_list.dart';
-// import 'package:flutter_admin_app/pages/app/app.dart';
 import 'package:flutter_admin_app/pages/Login.dart';
 
 final routes = {

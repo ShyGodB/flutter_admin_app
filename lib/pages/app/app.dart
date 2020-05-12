@@ -12,17 +12,15 @@ import '../views/tech/time.dart';
 import '../views/order/add.dart';
 
 
-class AppPage extends StatefulWidget {
-  AppPage({Key key, arguments}) : super(key: key);
-
-  @override
-  _AppPageState createState() => _AppPageState();
-}
-
-class _AppPageState extends State<AppPage> {
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('应用'),
+      ),
+      body: GridView.count(
         crossAxisCount: 3, // 子 Widget 的列数
         crossAxisSpacing: 5.0, // 水平子 Widget 之间的距离
         mainAxisSpacing: 5.0, // 垂直子 Widget 之间的距离
@@ -32,8 +30,14 @@ class _AppPageState extends State<AppPage> {
           InkWell(
             child: Container(
               alignment: Alignment.center,
-              color: Colors.blue,
-              child: Text('退款列表')
+              color: Colors.white,
+              child: Column(
+                children: <Widget>[
+                  Icon(Icons.people),
+                  SizedBox(height: 8),
+                  Text('退款列表', textAlign: TextAlign.center,)
+                ],
+              ),
             ),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
@@ -43,7 +47,7 @@ class _AppPageState extends State<AppPage> {
           InkWell(
             child: Container(
               alignment: Alignment.center,
-              color: Colors.blue,
+              color: Colors.white,
               child: Text('充值记录')
             ),
             onTap: () {
@@ -54,7 +58,7 @@ class _AppPageState extends State<AppPage> {
           InkWell(
             child: Container(
               alignment: Alignment.center,
-              color: Colors.blue,
+              color: Colors.white,
               child: Text('技师呼叫')
             ),
             onTap: () {
@@ -65,7 +69,7 @@ class _AppPageState extends State<AppPage> {
           InkWell(
             child: Container(
               alignment: Alignment.center,
-              color: Colors.blue,
+              color: Colors.white,
               child: Text('意见反馈')
             ),
             onTap: () {
@@ -76,7 +80,7 @@ class _AppPageState extends State<AppPage> {
           InkWell(
             child: Container(
               alignment: Alignment.center,
-              color: Colors.blue,
+              color: Colors.white,
               child: Text('头像审核')
             ),
             onTap: () {
@@ -87,7 +91,7 @@ class _AppPageState extends State<AppPage> {
           InkWell(
             child: Container(
               alignment: Alignment.center,
-              color: Colors.blue,
+              color: Colors.white,
               child: Text('回访记录')
             ),
             onTap: () {
@@ -98,7 +102,7 @@ class _AppPageState extends State<AppPage> {
           InkWell(
             child: Container(
               alignment: Alignment.center,
-              color: Colors.blue,
+              color: Colors.white,
               child: Text('成长记录')
             ),
             onTap: () {
@@ -109,7 +113,7 @@ class _AppPageState extends State<AppPage> {
           InkWell(
             child: Container(
               alignment: Alignment.center,
-              color: Colors.blue,
+              color: Colors.white,
               child: Text('业绩统计')
             ),
             onTap: () {
@@ -120,7 +124,7 @@ class _AppPageState extends State<AppPage> {
           InkWell(
             child: Container(
               alignment: Alignment.center,
-              color: Colors.blue,
+              color: Colors.white,
               child: Text('接单时长')
             ),
             onTap: () {
@@ -131,7 +135,7 @@ class _AppPageState extends State<AppPage> {
           InkWell(
             child: Container(
               alignment: Alignment.center,
-              color: Colors.blue,
+              color: Colors.white,
               child: Text('渠道补单')
             ),
             onTap: () {
@@ -142,7 +146,7 @@ class _AppPageState extends State<AppPage> {
           InkWell(
             child: Container(
               alignment: Alignment.center,
-              color: Colors.blue,
+              color: Colors.white,
               child: Text('退出')
             ),
             onTap: () {
@@ -150,6 +154,7 @@ class _AppPageState extends State<AppPage> {
             },
           ),
         ]
+      )
     );
   }
 }
