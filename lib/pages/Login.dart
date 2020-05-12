@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_admin_app/api/Index.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage({Key key}) : super(key: key);
+class Login extends StatefulWidget {
+  Login({Key key}) : super(key: key);
 
   @override
-  _LoginPagetate createState() => _LoginPagetate();
+  _Logintate createState() => _Logintate();
 }
 
 
-class _LoginPagetate extends State<LoginPage> {
+class _Logintate extends State<Login> {
   String phone;
   String password;
   GlobalKey<FormState> _loginFormKey = GlobalKey();
@@ -19,10 +20,11 @@ class _LoginPagetate extends State<LoginPage> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/login-bg.png'),
-            fit: BoxFit.fill,
-          ),
+          color: Colors.white54,
+          // image: DecorationImage(
+          //   image: AssetImage('assets/images/login-bg.png'),
+          //   fit: BoxFit.fill,
+          // ),
         ),
         padding: EdgeInsets.all(10.0),
         child: Form(
@@ -66,11 +68,15 @@ class _LoginPagetate extends State<LoginPage> {
                 child: RaisedButton(
                   child: Text('登陆', style: TextStyle(color: Colors.white)),
                   color: Colors.blue,
-                  onPressed: () {
+                  onPressed: () async {
                     _loginFormKey.currentState.save();
                     _loginFormKey.currentState.validate();
-                    print('phone: $phone    password: $password');
-                    _onLogin(phone, password);
+                    bool result = await _onLogin(phone, password);
+                    if (result) {
+                      Navigator.pushNamed(context, '/');
+                    } else {
+                      print('登陆失败');
+                    }
                   },
                 )
               )
@@ -82,12 +88,18 @@ class _LoginPagetate extends State<LoginPage> {
   }
 }
 
-void _onLogin(String phone, String password) async {
+Future _onLogin(String phone, String password) async {
   Map form = { "phone": phone, "password": password };
   final res = await post('/index/appLogin', form);
   if (res['success']) {
-    print('登陆成功');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Map userinfo = res['data'];
+    String authtoken = res['authtoken'];
+    await prefs.setString('userinfo', userinfo.toString());
+    await prefs.setString('authtoken', authtoken);
+    return true;
   } else {
     print('登陆失败');
+    return false;
   }
 }

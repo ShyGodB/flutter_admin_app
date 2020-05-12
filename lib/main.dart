@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Color(0xffeeeeee),
         backgroundColor: Color(0xffeeeeee),
       ),
-      initialRoute: '/',
+      initialRoute: '/login',
       onGenerateRoute: onGenerateRoute,
     );
   }

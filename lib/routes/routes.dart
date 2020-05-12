@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_admin_app/pages/tabs.dart';
 import 'package:flutter_admin_app/pages/Login.dart';
 
+
 final routes = {
   '/': (context) => Tabs(),
-  '/login': (context) => LoginPage(),
+  '/login': (context) => Login(),
 };
 
 dynamic onGenerateRoute = (RouteSettings settings) {
+  // 登陆验证
   final String name = settings.name;
   final Function pageContentBuilder = routes[name];
   if (pageContentBuilder != null) {
