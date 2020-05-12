@@ -6,18 +6,18 @@ import './comment.dart';
 import './coupon.dart';
 import './review.dart';
 
-class UserInfoPage extends StatefulWidget {
+class UserInfo extends StatefulWidget {
   final String arguments;
-  UserInfoPage({Key key, this.arguments = ''}) : super(key: key);
+  UserInfo({Key key, this.arguments = ''}) : super(key: key);
 
   @override
-  _UserInfoPageState createState() =>
-      _UserInfoPageState(arguments: this.arguments);
+  _UserInfoState createState() =>
+      _UserInfoState(arguments: this.arguments);
 }
 
-class _UserInfoPageState extends State<UserInfoPage> {
+class _UserInfoState extends State<UserInfo> {
   String arguments;
-  _UserInfoPageState({Key key, this.arguments = ''});
+  _UserInfoState({Key key, this.arguments = ''});
 
   dynamic _getData() async {
     var res = await post('/user/info', {"userId": this.arguments});

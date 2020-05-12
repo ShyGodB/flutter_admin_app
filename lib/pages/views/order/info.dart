@@ -165,7 +165,7 @@ class _OrderInfoPageState extends State<OrderInfoPage>  with TickerProviderState
             child: Text('查看详情'),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => UserInfoPage(
+                builder: (context) => UserInfo(
                       arguments: data['userId'].toString(),
                     )));
             })
@@ -236,7 +236,7 @@ class _OrderInfoPageState extends State<OrderInfoPage>  with TickerProviderState
             child: Text('查看详情'),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => TechInfoPage(
+                builder: (context) => TechInfo(
                       arguments: data['techId'].toString(),
                     )));
             })

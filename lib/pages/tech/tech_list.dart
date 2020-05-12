@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../../api/Index.dart';
-
-import '../views/tech/info.dart';
+import 'components/tech_item.dart';
 
 class TechList extends StatefulWidget {
   TechList({Key key}) : super(key: key);
@@ -12,47 +10,105 @@ class TechList extends StatefulWidget {
 }
 
 class _TechListState extends State<TechList> {
-    Map form = { "pageIndex": 1, "pageSize": 10 };
+  ScrollController _controller = new ScrollController();
+  bool ifLoading = false;
+  Map form = { "pageIndex": 1, "pageSize": 10 };
+  List data = [];
 
-    _listTech() async {
-        var res = await post('/tech/list', form);
-        return res['data']['list'];
-    }
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() {
+      var maxScroll = _controller.position.maxScrollExtent;
+      var pixel = _controller.position.pixels;
+      if (pixel == maxScroll && !ifLoading) {
+        _getMoreData();
+      }
+    });
+  }
 
-    Widget _buildTechListWidget(data) {
-        List<Widget> list = [];
-        for (var item in data) {
-            var column = ListTile(
-                leading: item['headImg'] == null ?  Text('暂无头像') : CircleAvatar(backgroundImage: NetworkImage(item['headImg']),),
-                title: Text("${item['realName']}    ${item['gender']}    ${item['phone']}   ${item['techState']['name']}"),
-                subtitle: Text("${item['orders']}    ${item['clicks']}   ${item['state']}")
-            );  
-            list.add(InkWell(
-                child: Card(
-                    margin: EdgeInsets.all(10.0),
-                    child: column,
+  _getData() async {
+    var res = await post('/tech/list', form);
+    this.data.addAll(res['data']['list']);
+    return res['data']['list'];
+  }
+
+  _getMoreData() async {
+    setState(() {
+      ifLoading = true;
+    });
+    this.form['pageIndex']++;
+    var res = await post('/tech/list', form);
+    setState(() {
+      ifLoading = false;
+      this.data.addAll(res['data']['list']);
+    });
+    return res['data']['list'];
+  }
+
+  Future _refresh() async {
+    form['pageIndex'] += 1;
+    form['pageSize'] = 10;
+    data.clear();
+    form = form;
+    setState(() {
+      ifLoading = true;
+    });
+    await _getData();
+    
+    return null;
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: this._getData(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        this.ifLoading = false;
+        if (snapshot.hasData == false) {
+            return Center(child: CircularProgressIndicator());
+        } else {
+          return Container(
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.only(bottom: 10),
+            color: Color(0xffeeeeee),
+            child: Stack(
+              children: <Widget>[
+                RefreshIndicator(
+                  backgroundColor: Colors.blue,
+                  child: ListView.builder(
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                      return TechItem(
+                        techId: this.data[index]['techId'].toString(),
+                        realName: this.data[index]['realName'].toString(),
+                        phone: this.data[index]['phone'].toString(),
+                        gender: this.data[index]['gender'].toString(),
+                        // acceptState: this.data[index]['acceptState'].toString(),
+                        age: this.data[index]['age'].toString(),
+                        headImg: this.data[index]['headImg'].toString(),
+                        attribution: this.data[index]['attribution'].toString(),
+                        orders: this.data[index]['orders'].toString(),
+                        clicks: this.data[index]['clicks'].toString(),
+                        state: this.data[index]['state'].toString(),
+                        amount: '0'
+                      );
+                    },
+                    controller: _controller,
+                  ),
+                  onRefresh: this._refresh,
                 ),
-                onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => TechInfoPage(
-                            arguments: item['techId'].toString(),
-                            )));
-                }));
+                ifLoading ? Center(child: CircularProgressIndicator()) : Container()
+              ],
+            )
+          );
         }
-        return ListView(children: list);
-    }
-
-    @override
-    Widget build(BuildContext context) {
-        return FutureBuilder(
-        future: this._listTech(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.hasData == false) {
-            return Text('');
-            } else {
-            return this._buildTechListWidget(snapshot.data);
-            }
-        },
-        );
-    }
+      },
+    );
+  }
 }

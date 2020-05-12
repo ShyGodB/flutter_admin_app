@@ -18,7 +18,11 @@ class BottomItem extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.symmetric(horizontal: 0, vertical: 5),
-      color: Color(0xffffffff),
+      decoration: BoxDecoration(
+        color: Color(0xffffffff),
+        border: Border.all(width: 2.0, color: Colors.white),
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+      ),
       child: Row(children: <Widget>[
           Expanded(
               child: Column(children: <Widget>[

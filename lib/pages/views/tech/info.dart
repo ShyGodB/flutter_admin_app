@@ -5,18 +5,18 @@ import './order.dart';
 import './comment.dart';
 import './growth.dart';
 
-class TechInfoPage extends StatefulWidget {
+class TechInfo extends StatefulWidget {
   final String arguments;
-  TechInfoPage({Key key, this.arguments = ''}) : super(key: key);
+  TechInfo({Key key, this.arguments = ''}) : super(key: key);
 
   @override
-  _TechInfoPageState createState() =>
-      _TechInfoPageState(arguments: this.arguments);
+  _TechInfoState createState() =>
+      _TechInfoState(arguments: this.arguments);
 }
 
-class _TechInfoPageState extends State<TechInfoPage> {
+class _TechInfoState extends State<TechInfo> {
   String arguments;
-  _TechInfoPageState({Key key, this.arguments = ''});
+  _TechInfoState({Key key, this.arguments = ''});
 
   dynamic _getData() async {
     var res = await post('/tech/detail', {"techId": this.arguments});
