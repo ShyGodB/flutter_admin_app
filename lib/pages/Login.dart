@@ -92,7 +92,7 @@ class _Logintate extends State<Login> {
 Future _onLogin(String phone, String password) async {
   Map form = { "phone": phone, "password": password };
   final res = await post('/index/appLogin', form);
-  if (res['success']) {
+  if (res['success'] == true) {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     Map userinfo = res['data'];
     String authtoken = res['authtoken'];

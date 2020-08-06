@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 String apiUrl = 'http://10.0.2.2:3101/api/admin'; // android
 // String apiUrl = 'http://127.0.0.1:3101/api/admin'; // ios 
@@ -11,7 +12,14 @@ dynamic get(String url, data) async {
 }
 
 dynamic post(String url, data) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String authtoken = prefs.getString('authtoken');
   String reqUrl = apiUrl + url;
-  Response res = await Dio().post(reqUrl, data: data);
+  Map<String, dynamic> httpHeaders = {
+    'Accept': 'application/json,*/*',
+    'Content-Type': 'application/json',
+    'authtoken': authtoken
+  };
+  Response res = await Dio().post(reqUrl, data: data, options: Options(headers: httpHeaders));
   return res.data;
 }
