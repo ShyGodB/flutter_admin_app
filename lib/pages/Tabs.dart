@@ -29,11 +29,13 @@ class _TabState extends State<Tabs> {
         body: this._pageList[this._currentIndex],
         bottomNavigationBar: BottomNavigationBar(
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('首页')),
-            BottomNavigationBarItem(icon: Icon(Icons.book), title: Text('订单')),
-            BottomNavigationBarItem(icon: Icon(Icons.people), title: Text('用户')),
-            BottomNavigationBarItem(icon: Icon(Icons.supervised_user_circle), title: Text('技师')),
-            BottomNavigationBarItem(icon: Icon(Icons.apps), title: Text('应用'))
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: Text('首页')),
+            BottomNavigationBarItem(icon: Icon(Icons.book), label: Text('订单')),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.people), label: Text('用户')),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.supervised_user_circle), label: Text('技师')),
+            BottomNavigationBarItem(icon: Icon(Icons.apps), label: Text('应用'))
           ],
           type: BottomNavigationBarType.fixed,
           currentIndex: this._currentIndex,

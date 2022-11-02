@@ -12,11 +12,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Map form = { "pageIndex": 1, "pageSize": 10 };
+  Map form = {"pageIndex": 1, "pageSize": 10};
 
   _getData() async {
-      var res = await post('/index/data', form);
-      return res;
+    var res = await post('/index/data', form);
+    return res;
   }
 
   Widget _buildWidget(res) {
@@ -30,34 +30,59 @@ class _HomeState extends State<Home> {
     List orders = [];
     List turnover = [];
     week.forEach((item) {
-        times.add(item['time']);
-        orders.add(item['totalOrder']);
-        turnover.add(item['turnover']);
+      times.add(item['time']);
+      orders.add(item['totalOrder']);
+      turnover.add(item['turnover']);
     });
     return ListView(children: <Widget>[
-        Container(
-            height: 150,
-            child: HomeEchart(orders: orders, times: times, turnover: turnover)
-        ),
-        Container(
+      Container(
+          height: 150,
+          child: HomeEchart(orders: orders, times: times, turnover: turnover)),
+      Container(
           padding: EdgeInsets.all(10),
-          child: Column(children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(bottom: 10),
-              child: UserTechCount(userCount: userCount, techCount: techCount)
-            ),
-            Container(
-              child: Column(children: <Widget>[
-                BottomItem(title: '交易额', today: today['turnover'].toString(), yestoday: yesterday['turnover'].toString(), total: total['turnover'].toString()),
-                BottomItem(title: '总单量', today: today['totalOrder'].toString(), yestoday: yesterday['totalOrder'].toString(), total: total['totalOrder'].toString()),
-                BottomItem(title: '超时接单', today: today['overTimeOrder'].toString(), yestoday: yesterday['overTimeOrder'].toString(), total: total['overTimeOrder'].toString()),
-                BottomItem(title: '用户取消', today: today['cancelOrder'].toString(), yestoday: yesterday['cancelOrder'].toString(), total: total['cancelOrder'].toString()),
-                BottomItem(title: '交通费', today: today['transFee'].toString(), yestoday: yesterday['transFee'].toString(), total: total['transFee'].toString()),
-                BottomItem(title: '优惠卷', today: today['couponFee'].toString(), yestoday: yesterday['couponFee'].toString(), total: total['couponFee'].toString()),
-              ],)
-            )
-          ],)
-        )
+          child: Column(
+            children: <Widget>[
+              Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  child: UserTechCount(
+                      userCount: userCount, techCount: techCount)),
+              Container(
+                  child: Column(
+                children: <Widget>[
+                  BottomItem(
+                      title: '交易额',
+                      today: today['turnover'].toString(),
+                      yestoday: yesterday['turnover'].toString(),
+                      total: total['turnover'].toString()),
+                  BottomItem(
+                      title: '总单量',
+                      today: today['totalOrder'].toString(),
+                      yestoday: yesterday['totalOrder'].toString(),
+                      total: total['totalOrder'].toString()),
+                  BottomItem(
+                      title: '超时接单',
+                      today: today['overTimeOrder'].toString(),
+                      yestoday: yesterday['overTimeOrder'].toString(),
+                      total: total['overTimeOrder'].toString()),
+                  BottomItem(
+                      title: '用户取消',
+                      today: today['cancelOrder'].toString(),
+                      yestoday: yesterday['cancelOrder'].toString(),
+                      total: total['cancelOrder'].toString()),
+                  BottomItem(
+                      title: '交通费',
+                      today: today['transFee'].toString(),
+                      yestoday: yesterday['transFee'].toString(),
+                      total: total['transFee'].toString()),
+                  BottomItem(
+                      title: '优惠卷',
+                      today: today['couponFee'].toString(),
+                      yestoday: yesterday['couponFee'].toString(),
+                      total: total['couponFee'].toString()),
+                ],
+              ))
+            ],
+          ))
     ]);
   }
 

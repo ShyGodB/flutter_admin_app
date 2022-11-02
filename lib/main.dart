@@ -10,11 +10,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.blue,
-        textSelectionColor: Colors.red,
         selectedRowColor: Colors.red,
         unselectedWidgetColor: Colors.white,
         scaffoldBackgroundColor: Color(0xffeeeeee),
-        backgroundColor: Color(0xffeeeeee),
+        backgroundColor: Color(0xffeeeeee), textSelectionTheme: TextSelectionThemeData(selectionColor: Colors.red),
       ),
       initialRoute: '/login',
       onGenerateRoute: onGenerateRoute,
