@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../api/Index.dart';
+import '../../api/index.dart';
 import 'components/tech_item.dart';
 
 class TechList extends StatefulWidget {

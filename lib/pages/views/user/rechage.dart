@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../api//Index.dart';
+import '../../../api/index.dart';
 
 class RechargeListPage extends StatefulWidget {
   RechargeListPage({Key key}) : super(key: key);

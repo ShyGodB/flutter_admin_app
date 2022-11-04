@@ -1,4 +1,4 @@
-import 'package:flutter_admin_app/api/Index.dart';
+import 'package:flutter_admin_app/api/index.dart';
 import 'package:flutter/material.dart';
 
 import '../tech/info.dart';

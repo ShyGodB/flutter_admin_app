@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../api//Index.dart';
+import '../../../api/index.dart';
 
 class AlarmListPage extends StatefulWidget {
   AlarmListPage({Key key}) : super(key: key);

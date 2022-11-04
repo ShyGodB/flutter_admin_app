@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../api//Index.dart';
+import '../../../api/index.dart';
 
 class ReviewListPage extends StatefulWidget {
   ReviewListPage({Key key}) : super(key: key);

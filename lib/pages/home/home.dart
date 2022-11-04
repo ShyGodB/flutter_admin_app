@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_admin_app/api/Index.dart';
+import 'package:flutter_admin_app/api/index.dart';
 import 'components/echart.dart';
 import 'components/user_tech.dart';
 import 'components/bottom_item.dart';

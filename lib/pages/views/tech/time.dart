@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../api//Index.dart';
+import '../../../api/index.dart';
 
 class TimeListPage extends StatefulWidget {
   TimeListPage({Key key}) : super(key: key);

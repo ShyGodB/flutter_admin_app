@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_admin_app/api/Index.dart';
+import 'package:flutter_admin_app/api/index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:flutter_admin_app/components/toast.dart';
 
@@ -66,9 +66,8 @@ class _Logintate extends State<Login> {
               Container(
                 width: double.infinity,
                 height: 44,
-                child: RaisedButton(
+                child: ElevatedButton(
                   child: Text('登陆', style: TextStyle(color: Colors.white)),
-                  color: Colors.blue,
                   onPressed: () async {
                     _loginFormKey.currentState.save();
                     _loginFormKey.currentState.validate();
